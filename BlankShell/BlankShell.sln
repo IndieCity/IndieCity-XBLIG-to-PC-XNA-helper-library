@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010 Express for Windows Phone
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlankShell", "BlankShell\BlankShell.csproj", "{CF003FD1-299D-4E77-B903-9828E802ED90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlankShellContent", "BlankShellContent\BlankShellContent.contentproj", "{845F3A6D-676F-4EF1-9E8B-C616CEDA1443}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndieCityXna", "..\IndieCityXna\IndieCityXna\IndieCityXna.csproj", "{A035D494-F0A3-4EA2-A844-C68F35A154B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF003FD1-299D-4E77-B903-9828E802ED90}.Debug|x86.ActiveCfg = Debug|x86
+		{CF003FD1-299D-4E77-B903-9828E802ED90}.Debug|x86.Build.0 = Debug|x86
+		{CF003FD1-299D-4E77-B903-9828E802ED90}.Release|x86.ActiveCfg = Release|x86
+		{CF003FD1-299D-4E77-B903-9828E802ED90}.Release|x86.Build.0 = Release|x86
+		{845F3A6D-676F-4EF1-9E8B-C616CEDA1443}.Debug|x86.ActiveCfg = Debug|x86
+		{845F3A6D-676F-4EF1-9E8B-C616CEDA1443}.Release|x86.ActiveCfg = Release|x86
+		{A035D494-F0A3-4EA2-A844-C68F35A154B1}.Debug|x86.ActiveCfg = Debug|x86
+		{A035D494-F0A3-4EA2-A844-C68F35A154B1}.Debug|x86.Build.0 = Debug|x86
+		{A035D494-F0A3-4EA2-A844-C68F35A154B1}.Release|x86.ActiveCfg = Release|x86
+		{A035D494-F0A3-4EA2-A844-C68F35A154B1}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
