@@ -43,8 +43,8 @@ namespace BlankShell.Frontend
         public LeaderboardsMenu(Game game, PlayerIndex? controllingPlayer)
             : base(game, controllingPlayer, Color.White)
         {
-            // set the title and it's alignment
-            title = "Leaderboards";
+            // set the title and it's alignment - no title on leaderboard menu as we expect the name of the leaderboard to be displayed
+            title = "";
             alignment = Alignment.centre;
 
             // set this menu to the required size
@@ -77,11 +77,10 @@ namespace BlankShell.Frontend
             if (transitionAmount != 0) return;
 
             // set the area of the screen that we wish the achievement list to be drawn into
-            // for this example it's the same area as the menu occupies, with bit cut off at the top and bottom 
-            // to make room for the title and the back button :)
+            // for this example it's the same area as the menu occupies, with bit cut off at the bottom to
+            // make room for the back button :)
             Rectangle displayArea = ItemArea;
-            displayArea.Y += 32;
-            displayArea.Height -= 64;
+            displayArea.Height -= 32;
 
             // display leaderboard browser and allow user to browse up and down through the current leaderboard
             // and left and right through the list of leaderboards
@@ -90,8 +89,8 @@ namespace BlankShell.Frontend
                 leaderboardsBrowser.Draw(displayArea, 500, ICLeaderboardColorMode.inverted);
                 if (inputManager.WasKeyPressed(Keys.Up, null)) leaderboardsBrowser.PageUp();
                 if (inputManager.WasKeyPressed(Keys.Down, null)) leaderboardsBrowser.PageDown();
-                if (inputManager.WasKeyPressed(Keys.Left, null)) leaderboardsBrowser.NextLeaderboard();
-                if (inputManager.WasKeyPressed(Keys.Right, null)) leaderboardsBrowser.PrevLeaderboard();
+                if (inputManager.WasKeyPressed(Keys.Right, null)) leaderboardsBrowser.NextLeaderboard();
+                if (inputManager.WasKeyPressed(Keys.Left, null)) leaderboardsBrowser.PrevLeaderboard();
             }
         }
     }

@@ -846,7 +846,6 @@ namespace ICAchievements
             unlockedAchievements.Enqueue(unlockedAchievement);
         }
 
-       
         public void OnAchievementUpdated(long achievementId, uint trueValue, uint awardCount)
         {
         }

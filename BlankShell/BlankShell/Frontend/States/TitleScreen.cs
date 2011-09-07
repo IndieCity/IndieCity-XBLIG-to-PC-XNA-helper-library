@@ -124,7 +124,7 @@ namespace BlankShell.Frontend
 
             // set the logo's position
             destRect.X = (int)((displayManager.GameResolutionX - logoTexture.Width) / 2);
-            destRect.Y = 360;
+            destRect.Y = 100;
             destRect.Width = logoTexture.Width;
             destRect.Height = logoTexture.Height;
 

@@ -86,7 +86,7 @@ namespace BlankShell.Frontend
             // display achievement list and allow user to browse up and down through it
             if (achievementList != null)
             {
-                achievementList.Draw(displayArea, 500, ICAchievementColorMode.inverted);
+                achievementList.Draw(displayArea, 500, ICAchievementColorMode.normal);
                 if (inputManager.WasKeyPressed(Keys.Up, null)) achievementList.PageUp();
                 if (inputManager.WasKeyPressed(Keys.Down, null)) achievementList.PageDown();
             }

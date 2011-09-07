@@ -98,6 +98,7 @@ namespace BlankShell
         private ICELandaLib.CoAchievementManager indieCityAchievementManager = null;
         private ICELandaLib.CoAchievementGroup indieCityAchievementGroup = null;
         private ICELandaLib.CoUserAchievementList indieCityUserList = null;
+        private ICELandaLib.CoLeaderboardManager indieCityLeaderboardManager = null;
         private uint m_cookie = 0;
 
         // IC achievement example variables
@@ -220,19 +221,30 @@ namespace BlankShell
                     base.Services.AddService(typeof(ICAchievementPopUp), achievementPopUp);
                     base.Services.AddService(typeof(ICAchievementList), achievementList);
 
+                    // get the current user's list of unlocked achievements
+                    indieCityUserList = indieCityAchievementManager.GetUserAchievementList(indieCitySession.UserId);
+
                     // register the pop up achievement class with the achievement manager to handle events
                     ICELandaLib.IAchievementService iService = (ICELandaLib.IAchievementService)indieCityAchievementManager;
                     m_cookie = iService.RegisterAchievementEventHandler(achievementPopUp);
 
-                    // initlaise the leaderboard browser class and register it as a service
-                    leaderboardBrowser = new ICLeaderboardsBrowser(this, graphicsDeviceManager, ICLeaderboardScale.normal);
-                    base.Services.AddService(typeof(ICLeaderboardsBrowser), leaderboardBrowser);
+                    // create the leaderboard manager
+                    indieCityLeaderboardManager = new ICELandaLib.CoLeaderboardManager();
+                    indieCityLeaderboardManager.SetGameSession(indieCitySession);
+                    indieCityLeaderboardManager.InitialiseLeaderboards(null);
+                    
+                    // we need to create a list of the leaderboard UIDs so that the game knows the order in which to display the leaderboards
+                    // this list will be custom for your game and will depend on the IDs that exist for your games leaderboards and the order
+                    // in which you wish to display them!
+                    int[] leaderboardUIDlist = {54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,120,74,75,76};
 
-                    // get the current user's list of unlocked achievements
-                    indieCityUserList = indieCityAchievementManager.GetUserAchievementList(indieCitySession.UserId);
-
-                    // indiecity initialisation complete - set status to running
-                   // gameStatus = GameStatus.running;
+                    // for sanity, check that the number of IDs we have specified is the same as the number of leaderboards before proceeding ;)
+                    if (leaderboardUIDlist.Length == indieCityLeaderboardManager.GetNumberLeaderboards())
+                    {
+                        // initlaise the leaderboard browser class and register it as a service
+                        leaderboardBrowser = new ICLeaderboardsBrowser(this, graphicsDeviceManager, indieCityLeaderboardManager, ICLeaderboardScale.normal, leaderboardUIDlist);
+                        base.Services.AddService(typeof(ICLeaderboardsBrowser), leaderboardBrowser);
+                    }
                 }
             }
 
@@ -285,6 +297,7 @@ namespace BlankShell
                     // do nothing...
                     if (indieCitySession != null)
                     {
+                        // update the indiecity session
                         indieCitySession.UpdateSession();
 
                         // update the indiecity achievement manager
@@ -304,6 +317,7 @@ namespace BlankShell
                     // update the indiecity session
                     if (indieCitySession != null)
                     {
+                        // update the indiecity session
                         indieCitySession.UpdateSession();
 
                         // update the indiecity achievement manager
@@ -312,6 +326,9 @@ namespace BlankShell
                         // check that the session is still valid and bail out if not
                         if (!indieCitySession.IsSessionStarted())
                         {
+                            // post a message to tell the user that the session has stopped
+                            messagePopUp.AddMessage("Connection Lost!", "The connection to IndieCity has been lost.\nThis session will now terminate.", ICMessagePriority.urgent);
+
                             // session has ended - exit the game!
                             gameStatus = GameStatus.exiting;
                         }
@@ -344,10 +361,13 @@ namespace BlankShell
             // process indiecity pop up achivements
             if (achievementList != null) achievementList.Update(indieCityUserList);
 
+            // process indiecity leaderboard browser
+            if (leaderboardBrowser != null) leaderboardBrowser.Update();
+
             // process indiecity messages
             messagePopUp.Update(displayManager.DisplaySize, timerSystem.TimeStep);
            
-            /*// test code - allow user to unlock achievements in sequence when they press 'U'
+            // test code - allow user to unlock achievements in sequence when they press 'U'
             if (inputManager.WasKeyPressed(Microsoft.Xna.Framework.Input.Keys.U, null))
             {
                 uint numAchievements = indieCityAchievementGroup.AchievementCount;
@@ -365,7 +385,7 @@ namespace BlankShell
                         break;
                     }
                 }
-            }*/
+            }
         }
 
         //------------------------------------------------------------------------------
@@ -384,10 +404,10 @@ namespace BlankShell
             // *** start of required indiecity draw calls ***
 
             // draw indiecity pop up achievements
-            if (achievementPopUp != null) achievementPopUp.Draw(displayManager.DisplaySize, ICAchievementColorMode.inverted);
+            if (achievementPopUp != null) achievementPopUp.Draw(displayManager.DisplaySize, ICAchievementColorMode.normal);
 
             // draw indiecity messages
-            if (messagePopUp != null) messagePopUp.Draw(displayManager.DisplaySize, ICMessageColorMode.normal);
+            if (messagePopUp != null) messagePopUp.Draw(displayManager.DisplaySize, ICMessageColorMode.inverted);
 
             // *** end of required indiecity draw calls ***
                         

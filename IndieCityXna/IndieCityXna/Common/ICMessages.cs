@@ -118,7 +118,7 @@ namespace ICMessages
         private static int maxDisplayWidth = 800;
         private static float safeZoneScaleValue = 0.07f;
         private static float messageAppearDuration = 0.25f;
-        private static float messageDisplayDuration = 3.0f;
+        private static float messageDisplayDuration = 6.0f;
         private static float messageRemoveDuration = 0.25f;
 
         // constant colours for normal display

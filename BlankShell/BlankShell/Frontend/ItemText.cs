@@ -65,10 +65,10 @@ namespace BlankShell.Frontend
                     position.X = 0;
                     break;
                 case Alignment.centre:
-                    position.X = (menu.ItemArea.Width - font.MeasureString(text).X) / 2;
+                    position.X = (int)((menu.ItemArea.Width - font.MeasureString(text).X) / 2);
                     break;
                 case Alignment.right:
-                    position.X = menu.ItemArea.Width - font.MeasureString(text).X;
+                    position.X = (int)(menu.ItemArea.Width - font.MeasureString(text).X);
                     break;
                 default:
                     position.X = 0;

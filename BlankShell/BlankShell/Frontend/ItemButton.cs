@@ -73,7 +73,7 @@ namespace BlankShell.Frontend
                     position.X = (menu.ItemArea.Width / 2) - (width / 2);
                     break;
                 case Alignment.right:
-                    position.X = width - font.MeasureString(text).X;
+                    position.X = width - (int)font.MeasureString(text).X;
                     break;
                 default:
                     position.X = 0;
@@ -154,12 +154,12 @@ namespace BlankShell.Frontend
 
                 case Alignment.right:
 
-                    fontPosition = new Vector2(menu.ItemArea.X + width - font.MeasureString(text).X - menu.ButtonRightTexture.Width, menu.ItemArea.Y + position.Y + textOffset);
+                    fontPosition = new Vector2(menu.ItemArea.X + width - (int)font.MeasureString(text).X - menu.ButtonRightTexture.Width, menu.ItemArea.Y + position.Y + textOffset);
                     break;
 
                 case Alignment.centre:
 
-                    fontPosition = new Vector2(menu.ItemArea.X + position.X + (width / 2) - (font.MeasureString(text).X / 2), menu.ItemArea.Y + position.Y + textOffset);
+                    fontPosition = new Vector2(menu.ItemArea.X + position.X + (int)(width / 2) - (int)(font.MeasureString(text).X / 2), menu.ItemArea.Y + position.Y + textOffset);
                     break;
 
                 default:

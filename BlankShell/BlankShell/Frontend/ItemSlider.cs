@@ -208,7 +208,7 @@ namespace BlankShell.Frontend
             fontColor.A = menu.TransitionAlpha;
             Vector2 fontPosition = new Vector2(menu.ItemArea.X + position.X + width + 4, menu.ItemArea.Y + position.Y - 2);
             spriteBatch.DrawString(font, currentValue.ToString(), fontPosition, fontColor);
-            fontPosition = new Vector2(menu.ItemArea.X + position.X - font.MeasureString(minValue.ToString()).X - 4, menu.ItemArea.Y + position.Y + textOffset);
+            fontPosition = new Vector2(menu.ItemArea.X + position.X - (int)font.MeasureString(minValue.ToString()).X - 4, menu.ItemArea.Y + position.Y + textOffset);
             spriteBatch.DrawString(font, minValue.ToString(), fontPosition, fontColor);
         }
     }

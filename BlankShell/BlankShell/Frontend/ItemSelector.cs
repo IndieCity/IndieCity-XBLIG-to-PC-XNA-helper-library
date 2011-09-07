@@ -76,7 +76,7 @@ namespace BlankShell.Frontend
                     position.X = (menu.ItemArea.Width / 2) - (width / 2);
                     break;
                 case Alignment.right:
-                    position.X = width - font.MeasureString(optionsText[selectedOption]).X;
+                    position.X = width - (int)font.MeasureString(optionsText[selectedOption]).X;
                     break;
                 default:
                     position.X = 0;
@@ -220,7 +220,7 @@ namespace BlankShell.Frontend
             spriteBatch.Draw(menu.SelectorRightTexture, shape, color);
 
             // draw the text
-            Vector2 fontPosition = new Vector2(menu.ItemArea.X + position.X + (width / 2) - (font.MeasureString(optionsText[selectedOption]).X / 2), menu.ItemArea.Y + position.Y + textOffset);
+            Vector2 fontPosition = new Vector2(menu.ItemArea.X + position.X + (int)(width / 2) - (int)(font.MeasureString(optionsText[selectedOption]).X / 2), menu.ItemArea.Y + position.Y + textOffset);
             fontColor.A = menu.TransitionAlpha;
             spriteBatch.DrawString(font, optionsText[selectedOption], fontPosition, fontColor);
         }
